@@ -37,8 +37,13 @@ void *sendd()
     while (socket_desc != INVALID_SOCKET)
     {
 
-        printf("\nEnter message:");
-        scanf("%[^\n]%*c\n", client_message);
+        printf("\nEnter message: ");
+        fgets(client_message, sizeof(client_message), stdin);
+
+        // Remove the newline character from input
+        size_t len = strlen(client_message);
+        if (len > 0 && client_message[len - 1] == '\n')
+            client_message[len - 1] = '\0';
 
         if (send(socket_desc, client_message, strlen(client_message), 0) < 0)
         {
@@ -93,7 +98,7 @@ int main(int argc, char *argv[])
     // Send connection request to server:
     if (connect(socket_desc, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
     {
-        printf("Unable to connect %d\n", WSAGetLastError());
+        printf("Unable to connect\n");
         return -1;
     }
     printf("Connected with server successfully\n");
