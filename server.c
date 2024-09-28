@@ -51,8 +51,13 @@ void *sendd()
 	while (new_socket != INVALID_SOCKET)
 	{
 		
-		printf("\nEnter message: ");
-		scanf("%[^\n]%*c", message);
+        printf("\nEnter message: ");
+        fgets(message, sizeof(message), stdin);
+
+        // Remove the newline character from input
+        size_t len = strlen(message);
+        if (len > 0 && message[len - 1] == '\n')
+        message[len - 1] = '\0';
 
 		send(new_socket, message, strlen(message), 0);
 
