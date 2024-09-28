@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <winsock2.h>
-#include <unistd.h>
-#pragma comment(lib, "ws2_32.lib")
-#include <pthread.h>
+#include "chat.h"
 
 WSADATA wsa;
 pthread_t t1, t2;
